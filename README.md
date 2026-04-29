@@ -6,10 +6,10 @@ This is a full-stack Airbnb clone built to replicate core functionalities of a p
 
 ## 🚀 Current Status
 
-🟡 Project is under active development
-✅ Core features implemented
-✅ MVC architecture structured
-🔧 Working on route optimization and additional features
+🟡 Project is under active development  
+✅ Core features implemented  
+✅ MVC architecture structured  
+🔧 Working on route optimization and additional features  
 
 ---
 
