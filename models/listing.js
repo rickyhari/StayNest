@@ -9,7 +9,7 @@ const listingSchema = Schema({
   },
   description: String,
   image: {
-    // filename: String,
+    filename: String,
     // url: String,
     url: {
       type: String,
