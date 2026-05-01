@@ -83,7 +83,6 @@
       <%# } %>
     </ul> -->
 
-    <% if(listing.reviews.length>0){ %>
     <p><b>All Reviews</b></p>
     <div class="row">
       <% for(review of listing.reviews) { %>
@@ -101,21 +100,5 @@
         </div>
       <% } %>
     </div>
-    <% } %>
-  </div>
-  <div class="col-8 offset-3 mb-3">
-    <h3>Where you'll be</h3>
-    <% 
-      let coords = (listing.geometry && listing.geometry.coordinates && listing.geometry.coordinates.length === 2) 
-        ? listing.geometry.coordinates 
-        : [77.1025, 28.7041];
-    %>
-    <div 
-      id="map" 
-      style="height: 400px; border-radius: 10px;"
-      data-lng="<%= coords[0] %>"
-      data-lat="<%= coords[1] %>"
-      data-title="<%= listing.title %>"
-    ></div>
   </div>
 </div>
