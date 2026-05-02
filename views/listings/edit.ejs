@@ -22,6 +22,23 @@
         <div class="valid-feedback">Title looks good</div>
       </div>
       <div class="mb-3">
+        <label for="category">Category</label>
+        <select id="category" name="listing[category]" class="form-control" required>
+          <option value="" disabled>Select a category</option>
+          <option value="Trending" <%= listing.category === "Trending" ? "selected" : "" %>>Trending</option>
+          <option value="Rooms" <%= listing.category === "Rooms" ? "selected" : "" %>>Rooms</option>
+          <option value="Iconic Cities" <%= listing.category === "Iconic Cities" ? "selected" : "" %>>Iconic Cities</option>
+          <option value="Mountains" <%= listing.category === "Mountains" ? "selected" : "" %>>Mountains</option>
+          <option value="Castles" <%= listing.category === "Castles" ? "selected" : "" %>>Castles</option>
+          <option value="Amazing pools" <%= listing.category === "Amazing pools" ? "selected" : "" %>>Amazing pools</option>
+          <option value="Camping" <%= listing.category === "Camping" ? "selected" : "" %>>Camping</option>
+          <option value="Farms" <%= listing.category === "Farms" ? "selected" : "" %>>Farms</option>
+          <option value="Arctic" <%= listing.category === "Arctic" ? "selected" : "" %>>Arctic</option>
+          <option value="Domes" <%= listing.category === "Domes" ? "selected" : "" %>>Domes</option>
+          <option value="Boats" <%= listing.category === "Boats" ? "selected" : "" %>>Boats</option>
+        </select>
+      </div>
+      <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea name="listing[description]" class="form-control" required><%=listing.description%></textarea>
         <div class="invalid-feedback">Please provide a short description!</div>
