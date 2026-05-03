@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review.js");
+const categories = require("../utils/categories");
 
 const listingSchema = Schema({
   title: {
@@ -25,8 +26,8 @@ const listingSchema = Schema({
   location: String,
   country: String,
   category: {
-    // New field added for filtering
     type: String,
+    enum: categories,
     required: true,
   },
   reviews: [
