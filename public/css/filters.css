@@ -1,0 +1,80 @@
+.filters-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#filters {
+  display: flex;
+  overflow-x: hidden;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+  width: 100%;
+  align-items: center;
+}
+
+.filter {
+  text-align: center;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  scroll-snap-align: start;
+  opacity: 0.7;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.filter p {
+  font-size: 0.8rem;
+}
+
+.active {
+  border-bottom: 2px solid black;
+  margin-top: 0px;
+}
+
+#scrollRightBtn {
+  margin-left: 1rem;
+  margin-right: 0rem;
+  background-color: white;
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  cursor: pointer;
+  font-size: 2rem;
+  border-radius: 4px;
+}
+
+#scrollLeftBtn {
+  margin-right: 1rem;
+  margin-left: 0rem;
+  background-color: white;
+  color: #333;
+  border: none;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 2rem;
+  border-radius: 4px;
+}
+
+.tax-info {
+  display: none;
+}
+
+.tax-toggle {
+  border: 1px solid black;
+  width: 230px;
+  border-radius: 1rem;
+  height: 3.25rem;
+  padding: 1rem;
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-check-label {
+  text-align: center;
+}
