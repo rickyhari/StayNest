@@ -1,4 +1,5 @@
 const Listing = require("../models/listing");
+const axios = require("axios");
 
 module.exports.index = async (req, res) => {
     const { search } = req.query;
@@ -41,6 +42,27 @@ module.exports.createListing = async (req, res, next) => {
   const newListing = new Listing(listing);
   //const newListing = new Listing(req.body.listing);
 
+  const location = req.body.listing.location;
+
+  const url = `https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${process.env.OPENCAGE_API_KEY}`;
+
+  const response = await axios.get(url);
+
+  // console.log(response.data.results[0].geometry);
+  // res.send("done!");
+
+  if (response.data.results.length === 0) {
+    req.flash("error", "Invalid location, please enter a valid place");
+    return res.redirect("/listings/new");
+  }
+
+  const { lat, lng } = response.data.results[0].geometry;
+
+  newListing.geometry = {
+    type: "Point",
+    coordinates: [lng, lat],
+  };
+
   newListing.owner = req.user._id;
 
   if (req.file) {
@@ -69,9 +91,35 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
-  // await Listing.findByIdAndUpdate(id, req.body.listing);
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
 
+  // 🔹 Step 0: existing listing fetch karo
+  let existingListing = await Listing.findById(id);
+
+  let updatedData = { ...req.body.listing };
+
+  // 🔹 Step 1: location change check
+  if (updatedData.location !== existingListing.location) {
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${updatedData.location}&key=${process.env.OPENCAGE_API_KEY}`;
+
+    const response = await axios.get(url);
+
+    if (response.data.results.length === 0) {
+      req.flash("error", "Invalid location, please enter a valid place");
+      return res.redirect(`/listings/${id}/edit`);
+    }
+
+    const { lat, lng } = response.data.results[0].geometry;
+
+    updatedData.geometry = {
+      type: "Point",
+      coordinates: [lng, lat],
+    };
+  }
+
+  // 🔹 Step 2: update after validation
+  let listing = await Listing.findByIdAndUpdate(id, updatedData, { new: true });
+
+  // 🔹 Step 3: image update
   if (req.file) {
     listing.image = {
       url: req.file.path,
