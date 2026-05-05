@@ -102,6 +102,13 @@ body {
     border: none !important;
 }
 
+.original-listing-img {
+  max-width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 /* Show Page */
 
 .show-img {

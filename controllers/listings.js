@@ -117,7 +117,7 @@ module.exports.updateListing = async (req, res) => {
   }
 
   // 🔹 Step 2: update after validation
-  let listing = await Listing.findByIdAndUpdate(id, updatedData, { new: true });
+  let listing = await Listing.findByIdAndUpdate(id, updatedData, { returnDocument: "after" });
 
   // 🔹 Step 3: image update
   if (req.file) {

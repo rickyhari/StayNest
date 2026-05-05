@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review.js");
 const categories = require("../utils/categories");
+const DEFAULT_IMAGE =
+  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=600&auto=format&fit=crop";
 
 const listingSchema = Schema({
   title: {
@@ -11,15 +13,10 @@ const listingSchema = Schema({
   description: String,
   image: {
     filename: String,
-    // url: String,
     url: {
       type: String,
-      default:
-        "https://images.unsplash.com/photo-1639060631449-4a3ba54a203a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      set: (v) =>
-        v === ""
-          ? "https://images.unsplash.com/photo-1639060631449-4a3ba54a203a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          : v,
+      default: DEFAULT_IMAGE,
+      set: (v) => (v === "" ? DEFAULT_IMAGE : v),
     },
   },
   price: Number,
@@ -50,7 +47,7 @@ const listingSchema = Schema({
       type: [Number], // [lng, lat]
       required: true,
     },
-  }
+  },
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {

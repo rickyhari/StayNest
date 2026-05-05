@@ -2,6 +2,38 @@ const Listing = require("./models/listing");
 const Review = require("./models/review");
 const {listingSchema, reviewSchema} = require("./schema.js");
 const ExpressError = require("./utils/ExpressError.js");
+const multer = require("multer");
+const { storage } = require("./cloudConfig");
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter: (req, file, cb) => {
+    // type check
+    if (file.mimetype.startsWith("image")) {
+      cb(null, true);
+    } else {
+      cb(new ExpressError(400, "Only image files allowed"), false);
+    }
+  },
+});
+
+module.exports.uploadMiddleware = (req, res, next) => {
+  upload.single("listing[image]")(req, res, (err) => {
+    if (err) {
+    // console.log(err);
+      let message = err.message;
+      if (err.code === "LIMIT_FILE_SIZE") {
+        message = "File too large (Max 5MB)";
+      }
+      const redirectUrl =
+        req.method === "PUT" ? req.originalUrl : "/listings/new";
+      req.flash("error", message);
+      return res.redirect(redirectUrl);
+    }
+    next();
+  });
+};
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {

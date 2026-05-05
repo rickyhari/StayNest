@@ -24,7 +24,12 @@
       </div>
       <div class="mb-3">
         <label for="category">Category</label>
-        <select id="category" name="listing[category]" class="form-control" required>
+        <select
+          id="category"
+          name="listing[category]"
+          class="form-control"
+          required
+        >
           <option value="" disabled selected>Select a category</option>
           <option value="Trending">Trending</option>
           <option value="Rooms">Rooms</option>
@@ -38,7 +43,7 @@
           <option value="Domes">Domes</option>
           <option value="Boats">Boats</option>
           <option value="Beach">Beach</option>
-        </select>              
+        </select>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
@@ -50,7 +55,10 @@
         <div class="invalid-feedback">Please provide a short description!</div>
       </div>
       <div class="mb-3">
-        <label for="image" class="form-label">Upload Listing Image</label>
+        <label for="image" class="form-label"
+          >Upload Listing Image
+          <small class="text-muted">(Max 5MB, images only)</small>
+        </label>
         <input name="listing[image]" type="file" class="form-control" />
       </div>
       <div class="row">
