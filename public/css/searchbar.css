@@ -17,5 +17,11 @@
 
 .search-inp {
   border-radius: 25px;
-  padding: 0.5rem 3rem 0.5rem 3rem;
+  padding: 0.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .search-inp {
+    padding: 0.5rem 3rem;
+  }
 }
