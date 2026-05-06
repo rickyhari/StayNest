@@ -27,10 +27,13 @@ body {
 .f-info-links a{
     text-decoration: none;
     color: #222222;
+    margin: 0 0.5rem;
 }
 
 .f-info-links a:hover{
     text-decoration: underline;
+    color: #ff385c;
+    cursor: pointer;
 }
 
 .f-info-links, .f-info-socials, .f-info-brand {
@@ -46,7 +49,9 @@ body {
 }
 
 .f-info {
-    height: 8rem;
+    height: 7rem;
+    font-size: 0.9rem;
+    color: #555;
     text-align: center;
     background-color: #ebebeb;
     display: flex;
